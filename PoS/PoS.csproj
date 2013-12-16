@@ -47,11 +47,8 @@
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Configuration.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Entities\Employee.cs" />
-    <Compile Include="Entities\Invoice.cs" />
     <Compile Include="Entities\Product.cs" />
-    <Compile Include="Entities\Sale.cs" />
-    <Compile Include="Entities\SaleDetail.cs" />
+    <Compile Include="Entities\Purchase.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Workshift.cs" />
     <Compile Include="frmMain.cs">
