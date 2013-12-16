@@ -10,7 +10,7 @@ namespace PoS.Entities
     {
         public int Id { get; set; }
         public DateTime Opening { get; set; }
-        public DateTime Cierre { get; set; }
+        public DateTime Closing { get; set; }
         public decimal CashAmount { get; set; }
 
         public int UserId { get; set; }
