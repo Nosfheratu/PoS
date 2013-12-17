@@ -1,8 +1,10 @@
 PoS
 ===
 
-Migrate Database with:
+INSTRUCTIONS
 
 1) Compile PoS Solution
+
 2) Run Migrations with:
-	PM> Migrate.exe /conn "Data Source=DB\PoSDB.sqlite;Version=3;" /provider sqlite /assembly DLLs\PoS.Data.dll
+
+PM> Migrate.exe /conn "Data Source=DB\PoSDB.sqlite;Version=3;" /provider sqlite /assembly DLLs\PoS.Data.dll
