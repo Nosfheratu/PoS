@@ -12,31 +12,115 @@ namespace PoS.Data.Migrations
     {
         public override void Up()
         {
+            #region Configurations
             Create.Table("Configurations")
                 .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
-                .WithColumn("ShopName").AsString(255).NotNullable()
-                .WithColumn("Addess").AsString(255).NotNullable()
-                .WithColumn("Phone").AsString(255).NotNullable()
-                .WithColumn("TicketsPrinter").AsString(255).NotNullable()
-                .WithColumn("ReportsPrinter").AsString(255).NotNullable();
+                .WithColumn("ShopName").AsString().NotNullable()
+                .WithColumn("Addess").AsString().NotNullable()
+                .WithColumn("Phone").AsString().NotNullable()
+                .WithColumn("TicketsPrinter").AsString().NotNullable()
+                .WithColumn("ReportsPrinter").AsString().NotNullable();
+            #endregion
 
-            Create.Table("Categories")
-                .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
-                .WithColumn("Name").AsString(255).NotNullable();
-
+            #region Customers
             Create.Table("Customers")
                 .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
-                .WithColumn("FullName").AsString(255).NotNullable()
-                .WithColumn("Address").AsString(255).NotNullable()
-                .WithColumn("State").AsString(255).NotNullable()
-                .WithColumn("City").AsString(255).NotNullable()
-                .WithColumn("ZipCode").AsString(255).NotNullable();
+                .WithColumn("FullName").AsString().NotNullable()
+                .WithColumn("Address").AsString().NotNullable()
+                .WithColumn("State").AsString().NotNullable()
+                .WithColumn("City").AsString().NotNullable()
+                .WithColumn("ZipCode").AsString().NotNullable();
+            #endregion
+
+            #region Categories
+            Create.Table("Categories")
+                .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
+                .WithColumn("Name").AsString().NotNullable();
+            #endregion
+
+            #region Products
+            Create.Table("Products")
+                .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
+                .WithColumn("Barcode").AsString().NotNullable()
+                .WithColumn("Name").AsString().NotNullable()
+                .WithColumn("Description").AsString().NotNullable()
+                .WithColumn("Price").AsDecimal(10, 2).NotNullable()
+                .WithColumn("VAT").AsDecimal(10, 2).NotNullable();
+                
+            Create.ForeignKey("fk_Products_CategoryId_Categories_Id")
+                .FromTable("Products").ForeignColumn("CategoryId")
+                .ToTable("Categories").PrimaryColumn("Id");
+            #endregion
+
+            #region Users
+            Create.Table("Users")
+                .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
+                .WithColumn("Username").AsString().NotNullable()
+                .WithColumn("Password").AsString().NotNullable()
+                .WithColumn("UserType").AsInt32().NotNullable();
+            #endregion
+
+            #region WorkShifts
+            Create.Table("WorkShifts")
+                .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
+                .WithColumn("Opening").AsDateTime().NotNullable()
+                .WithColumn("Closing").AsDateTime().NotNullable()
+                .WithColumn("CashAmount").AsDecimal(10, 2);
+
+            Create.ForeignKey("fk_WorkShifts_UserId_Users_Id")
+                .FromTable("WorkShifts").ForeignColumn("UserId")
+                .ToTable("Users").PrimaryColumn("Id");
+            #endregion
+
+            #region Purchases
+            Create.Table("Purchases")
+                .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
+                .WithColumn("Date").AsDateTime().NotNullable()
+                .WithColumn("TransactionNumber").AsString().NotNullable()
+                .WithColumn("Total").AsDecimal().NotNullable()
+                .WithColumn("Discount").AsDecimal().NotNullable();
+
+            Create.ForeignKey("fk_Purchases_ProductId_Products_Id")
+                .FromTable("Purchases").ForeignColumn("ProductId")
+                .ToTable("Products").PrimaryColumn("Id");
+
+            Create.ForeignKey("fk_Purchases_UserId_Users_Id")
+                .FromTable("Purchases").ForeignColumn("UserId")
+                .ToTable("Users").PrimaryColumn("Id");
+
+            Create.ForeignKey("fk_Purchases_CustomerId_Customers_Id")
+                .FromTable("Purchases").ForeignColumn("CustomerId")
+                .ToTable("Customers").PrimaryColumn("Id");
+            #endregion
+
+            SeedData();
+        }
+
+        private void SeedData()
+        {
+            #region Customers
+            Insert.IntoTable("Customers").Row(new { FullName = "General Public Sale", Address = " ", State = " ", City = " ", ZipCode = " " });
+            #endregion
+
+            #region Users
+            Insert.IntoTable("Users").Row(new { Username = "Admin", Password = "admin", UserType = 1 });
+            #endregion
         }
 
         public override void Down()
         {
-            Delete.Table("Customers");
+            Delete.Table("Purchases");
+
+            Delete.Table("WorkShifts");
+            
+            Delete.Table("Users");
+            
+            Delete.Table("Products");
+            
             Delete.Table("Categories");
+            
+            Delete.Table("Customers");
+            
             Delete.Table("Configurations");
         }
     }
