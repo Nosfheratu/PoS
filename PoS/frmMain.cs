@@ -12,9 +12,37 @@ namespace PoS
 {
     public partial class frmMain : Form
     {
+        //
         public frmMain()
         {
             InitializeComponent();
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
+            OpenTill();
+        }
+        
+        private void btnOpenTill_Click(object sender, EventArgs e)
+        {
+            OpenTill();
+        }
+
+        private void btnCloseTill_Click(object sender, EventArgs e)
+        {
+            CloseTill();
+        }
+
+        private void OpenTill()
+        {
+            frmLogin frmLogin = new frmLogin();
+            frmLogin.frmMain = this;
+            frmLogin.ShowDialog();
+        }
+
+        private void CloseTill()
+        {
         }
     }
 }
