@@ -37,21 +37,34 @@ namespace PoS
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            Logged = Login();
-
-            if (Logged)
+            if (!string.IsNullOrEmpty(txtPassword.Text))
             {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                Logged = Login();
+
+                if (Logged)
+                {
+                    MessageBox.Show("Login Success!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect password, type your correct password", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtPassword.Focus();
+                    this.DialogResult = DialogResult.None;
+                }
             }
             else
-                this.DialogResult = DialogResult.No;
+            {
+                MessageBox.Show("Please type a password", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txtPassword.Focus();
+                this.DialogResult = DialogResult.None;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.No;
-            this.Close();
         }
 
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
