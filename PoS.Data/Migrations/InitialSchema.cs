@@ -61,14 +61,15 @@ namespace PoS.Data.Migrations
             #endregion
 
             #region WorkShifts
-            Create.Table("WorkShifts")
+            Create.Table("Workshifts")
                 .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
                 .WithColumn("Opening").AsDateTime().NotNullable()
                 .WithColumn("Closing").AsDateTime().NotNullable()
-                .WithColumn("CashAmount").AsDecimal(10, 2);
+                .WithColumn("CashAmount").AsDecimal(10, 2)
+                .WithColumn("UserId").AsInt32().NotNullable();
 
-            Create.ForeignKey("fk_WorkShifts_UserId_Users_Id")
-                .FromTable("WorkShifts").ForeignColumn("UserId")
+            Create.ForeignKey("fk_Workshifts_UserId_Users_Id")
+                .FromTable("Workshifts").ForeignColumn("UserId")
                 .ToTable("Users").PrimaryColumn("Id");
             #endregion
 
@@ -111,7 +112,7 @@ namespace PoS.Data.Migrations
         {
             Delete.Table("Purchases");
 
-            Delete.Table("WorkShifts");
+            Delete.Table("Workshifts");
             
             Delete.Table("Users");
             

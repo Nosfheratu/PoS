@@ -16,13 +16,18 @@ namespace PoS.Entities
         
         public UserType UserType { get; set; }
 
-        public IList<Workshift> WorkShifts { get; set; }
+        public IList<Workshift> Workshifts { get; set; }
         
         public IList<Purchase> Purchases { get; set; }
 
         public bool ValidatePassword(string password)
         {
             return this.Password.Equals(password);
+        }
+
+        public User()
+        {
+            this.Workshifts = new List<Workshift>();
         }
     }
 
