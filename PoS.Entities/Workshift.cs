@@ -19,5 +19,18 @@ namespace PoS.Entities
         public int UserId { get; set; }
         
         public User User { get; set; }
+
+        public bool Opened
+        {
+            get
+            {
+                return Opening == Closing;
+            }
+        }
+
+        public void CloseTill()
+        {
+            this.Closing = DateTime.Now;
+        }
     }
 }
