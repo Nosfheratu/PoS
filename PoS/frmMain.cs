@@ -24,6 +24,23 @@ namespace PoS
 
             usersService = new UsersService();
             workshisftService = new WorkshiftsService();
+
+            this.KeyPress += (s, e) =>
+            {
+                switch (e.KeyChar)
+                {
+                    case (char)Keys.Enter:
+                        BeginSales();
+                        break;
+                    case (char)Keys.D1:
+                    case (char)Keys.NumPad1:
+                        //Option 1
+                        break;
+                    default:
+                        break;
+
+                }
+            };
         }
 
         private void frmMain_Load(object sender, EventArgs e)
