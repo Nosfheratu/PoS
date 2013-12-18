@@ -12,8 +12,8 @@ namespace PoS.Data.Migrations
     {
         public override void Up()
         {
-            #region Configurations
-            Create.Table("Configurations")
+            #region Settings
+            Create.Table("Settings")
                 .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
                 .WithColumn("ShopName").AsString().NotNullable()
                 .WithColumn("Addess").AsString().NotNullable()
@@ -121,7 +121,7 @@ namespace PoS.Data.Migrations
             
             Delete.Table("Customers");
             
-            Delete.Table("Configurations");
+            Delete.Table("Settings");
         }
     }
 }

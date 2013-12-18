@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PoS.Entities
 {
-    public class Configuration
+    public class Setting
     {
         public int Id { get; set; }
         

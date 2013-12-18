@@ -12,7 +12,6 @@ namespace PoS
 {
     public partial class frmMain : Form
     {
-        //
         public frmMain()
         {
             InitializeComponent();
@@ -20,7 +19,6 @@ namespace PoS
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
             OpenTill();
         }
         
