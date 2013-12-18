@@ -17,7 +17,9 @@ namespace PoS
     {
         public frmMain frmMain;
 
-        public int UserId { get { return Convert.ToInt32(cmbUsers.SelectedValue); } }
+        //public int UserId { get { return Convert.ToInt32(cmbUsers.SelectedValue); } }
+
+        public User User { get; set; }
 
         bool Logged { get; set; }
 
@@ -49,14 +51,14 @@ namespace PoS
                 }
                 else
                 {
-                    MessageBox.Show("Incorrect password, type your correct password", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Incorrect password, type your correct password.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtPassword.Focus();
                     this.DialogResult = DialogResult.None;
                 }
             }
             else
             {
-                MessageBox.Show("Please type a password", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Please type a password.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txtPassword.Focus();
                 this.DialogResult = DialogResult.None;
             }
@@ -82,6 +84,8 @@ namespace PoS
 
         private bool Login()
         {
+            this.User = _usersService.Find(Convert.ToInt32(cmbUsers.SelectedValue));
+
             return _usersService.Login(Convert.ToInt32(cmbUsers.SelectedValue), txtPassword.Text);
         }
     }
