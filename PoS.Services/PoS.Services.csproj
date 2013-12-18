@@ -54,8 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repositories\WorkshiftRepository.cs" />
     <Compile Include="UsersService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkshiftService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PoS.Entities\PoS.Entities.csproj">

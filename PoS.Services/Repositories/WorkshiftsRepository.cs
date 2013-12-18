@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,13 +7,13 @@ using System.Threading.Tasks;
 using Simple.Data;
 using PoS.Entities;
 
-namespace PoS.Services
+namespace PoS.Data.Repositories
 {
-    public class UsersService
+    public class WorkshiftsRepository
     {
         dynamic db;
 
-        public UsersService()
+        public WorkshiftsRepository()
         {
             db = Database.OpenFile(GetDBPath());
         }
@@ -25,21 +23,20 @@ namespace PoS.Services
             return @"C:\Users\Fernando Serapio\Documents\visual studio 2012\Projects\PoS\DB\PoSDB.sqlite";
         }
 
-        public List<User> GetAll()
+        public Workshift Add(Workshift workshift)
         {
-            return this.db.Users.All();
+            this.db.Workshifts.Insert(workshift);
+            return workshift;
         }
 
-        public User Find(int id)
+        public List<Workshift> GetAll()
         {
-            return this.db.Users.FindById(id);
+            return this.db.Workshifts.All();
         }
 
-        public bool Login(int userId, string password)
+        public void Update(Workshift lastWorkshift)
         {
-            User user = db.Users.FindById(userId);
-
-            return user.ValidatePassword(password);
+            this.db.Workshifts.Update(lastWorkshift);
         }
     }
 }
