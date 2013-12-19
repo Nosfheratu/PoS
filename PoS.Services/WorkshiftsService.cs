@@ -37,16 +37,11 @@ namespace PoS.Services
             return workshift.Closing == workshift.Opening ? true : false;
         }
 
-        public User GetUserByOpenedTill()
+        public Workshift GetLastWorkshift()
         {
-            var workshift = workshiftRepository.GetAll().LastOrDefault();
-            
-            var user = usersService.Find(workshift.UserId);
-            user.Workshifts.Add(workshift);
-
-            return user;
+            return workshiftRepository.GetAll().LastOrDefault();
         }
-
+        
         public void CloseLastWorkshift()
         {
             var lastWorkshift = workshiftRepository.GetAll().LastOrDefault();

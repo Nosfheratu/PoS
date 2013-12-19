@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomersService.cs" />
+    <Compile Include="Repositories\CustomersRepository.cs" />
     <Compile Include="Repositories\WorkshiftsRepository.cs" />
     <Compile Include="UsersService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
