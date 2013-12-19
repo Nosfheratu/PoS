@@ -30,11 +30,11 @@ namespace PoS
                 switch (e.KeyChar)
                 {
                     case (char)Keys.Enter:
-                        BeginSales();
                         break;
                     case (char)Keys.D1:
                     case (char)Keys.NumPad1:
                         //Option 1
+                        BeginSales();
                         break;
                     default:
                         break;
@@ -81,16 +81,17 @@ namespace PoS
 
         private void ValidateTills()
         {
-            var user = workshisftService.GetUserByOpenedTill();
-            var workshift = user.Workshifts.Last();
-            
-            if (workshift.Opened)
+            var workshift = workshisftService.GetLastWorkshift();
+
+            if (workshift != null && workshift.Opened)
             {
+                var lastUser = usersService.Find(workshift.UserId);
+
                 btnCloseTill.Enabled = true;
                 btnOpenTill.Enabled = false;
-                
-                lblNombreUsuario.Text = user.Username;
-                lblUserId.Text = user.Id.ToString();
+
+                lblNombreUsuario.Text = lastUser.Username;
+                lblUserId.Text = lastUser.Id.ToString();
             }
             else
                 OpenTill();
