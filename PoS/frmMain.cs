@@ -15,6 +15,8 @@ namespace PoS
 {
     public partial class frmMain : Form
     {
+        User CurrentUser;
+
         UsersService usersService;
         WorkshiftsService workshisftService;
 
@@ -25,15 +27,12 @@ namespace PoS
             usersService = new UsersService();
             workshisftService = new WorkshiftsService();
 
-            this.KeyPress += (s, e) =>
+            this.KeyDown += (s, e) =>
             {
-                switch (e.KeyChar)
+                switch (e.KeyCode)
                 {
-                    case (char)Keys.Enter:
-                        break;
-                    case (char)Keys.D1:
-                    case (char)Keys.NumPad1:
-                        //Option 1
+                    case Keys.F5:
+                        // Begin Sales option
                         BeginSales();
                         break;
                     default:
@@ -50,8 +49,6 @@ namespace PoS
             ValidateSettings();
             
             ValidateTills();
-            
-            BeginSales();
         }
         
         private void btnOpenTill_Click(object sender, EventArgs e)
@@ -85,13 +82,13 @@ namespace PoS
 
             if (workshift != null && workshift.Opened)
             {
-                var lastUser = usersService.Find(workshift.UserId);
+                this.CurrentUser = usersService.Find(workshift.UserId);
 
                 btnCloseTill.Enabled = true;
                 btnOpenTill.Enabled = false;
 
-                lblNombreUsuario.Text = lastUser.Username;
-                lblUserId.Text = lastUser.Id.ToString();
+                lblNombreUsuario.Text = this.CurrentUser.Username;
+                lblUserId.Text = this.CurrentUser.Id.ToString();
             }
             else
                 OpenTill();
@@ -99,7 +96,9 @@ namespace PoS
 
         private void BeginSales()
         {
-
+            Form frmSales = new Forms.Sales.frmSales(this.CurrentUser);
+            frmSales.MdiParent = this;
+            frmSales.Show();
         }
 
         private void OpenTill()
@@ -110,14 +109,14 @@ namespace PoS
 
             if (frmLogin.DialogResult == DialogResult.OK)
             {
-                var user = frmLogin.User;
+                this.CurrentUser = frmLogin.User;
 
                 btnOpenTill.Enabled = false;
                 
-                lblUserId.Text = user.Id.ToString();
-                lblNombreUsuario.Text = user.Username;
+                lblUserId.Text = this.CurrentUser.Id.ToString();
+                lblNombreUsuario.Text = this.CurrentUser.Username;
                 
-                OpenTillForUser(user);
+                OpenTillForUser(this.CurrentUser);
                 
                 btnCloseTill.Enabled = true;
             }

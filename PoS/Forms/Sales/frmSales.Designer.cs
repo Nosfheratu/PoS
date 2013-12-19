@@ -75,6 +75,7 @@
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.Size = new System.Drawing.Size(106, 20);
             this.txtDiscount.TabIndex = 46;
+            this.txtDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtTotal
             // 
@@ -112,9 +113,9 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(488, 486);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(69, 13);
+            this.label12.Size = new System.Drawing.Size(52, 13);
             this.label12.TabIndex = 41;
-            this.label12.Text = "Discount (%):";
+            this.label12.Text = "Discount:";
             // 
             // txtSubtotal
             // 
@@ -278,9 +279,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(193, 54);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 13);
+            this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Clave:";
+            this.label1.Text = "Barcode:";
             // 
             // btnAddItem
             // 
@@ -334,7 +335,7 @@
             // 
             // cHeader1
             // 
-            this.cHeader1.Text = "Code";
+            this.cHeader1.Text = "Barcode";
             this.cHeader1.Width = 74;
             // 
             // cHeader2
@@ -345,7 +346,7 @@
             // 
             // cHeader3
             // 
-            this.cHeader3.Text = "Description";
+            this.cHeader3.Text = "Product";
             this.cHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.cHeader3.Width = 179;
             // 
@@ -378,9 +379,10 @@
             // 
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.Location = new System.Drawing.Point(488, 536);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(34, 13);
+            this.label14.Size = new System.Drawing.Size(40, 13);
             this.label14.TabIndex = 44;
             this.label14.Text = "Total:";
             // 
@@ -424,7 +426,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(696, 595);
+            this.ClientSize = new System.Drawing.Size(688, 587);
             this.ControlBox = false;
             this.Controls.Add(this.txtDiscount);
             this.Controls.Add(this.txtTotal);
@@ -446,7 +448,6 @@
             this.Name = "frmSales";
             this.ShowIcon = false;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frmSales_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
