@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomersService.cs" />
+    <Compile Include="ProductsService.cs" />
+    <Compile Include="Repositories\ProductsRepository.cs" />
     <Compile Include="Repositories\CustomersRepository.cs" />
     <Compile Include="Repositories\WorkshiftsRepository.cs" />
     <Compile Include="UsersService.cs" />
