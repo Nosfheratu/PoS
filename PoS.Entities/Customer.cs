@@ -11,6 +11,8 @@ namespace PoS.Entities
         public int Id { get; set; }
         
         public string FullName { get; set; }
+
+        public string TaxId { get; set; }
         
         public string Address { get; set; }
         
@@ -21,5 +23,10 @@ namespace PoS.Entities
         public string ZipCode { get; set; }
 
         public IList<Purchase> Purchases { get; set; }
+
+        public Customer()
+        {
+            this.Purchases = new List<Purchase>();
+        }
     }
 }
