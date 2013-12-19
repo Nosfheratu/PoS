@@ -46,7 +46,8 @@ namespace PoS.Data.Migrations
                 .WithColumn("Name").AsString().NotNullable()
                 .WithColumn("Description").AsString().NotNullable()
                 .WithColumn("Price").AsDecimal(10, 2).NotNullable()
-                .WithColumn("VAT").AsDecimal(10, 2).NotNullable();
+                .WithColumn("VAT").AsDecimal(10, 2).NotNullable()
+                .WithColumn("CategoryId").AsInt32().NotNullable(); //If provider is SQLite
                 
             Create.ForeignKey("fk_Products_CategoryId_Categories_Id")
                 .FromTable("Products").ForeignColumn("CategoryId")
@@ -67,7 +68,7 @@ namespace PoS.Data.Migrations
                 .WithColumn("Opening").AsDateTime().NotNullable()
                 .WithColumn("Closing").AsDateTime().NotNullable()
                 .WithColumn("CashAmount").AsDecimal(10, 2)
-                .WithColumn("UserId").AsInt32().NotNullable();
+                .WithColumn("UserId").AsInt32().NotNullable(); //If provider is SQLite
 
             Create.ForeignKey("fk_Workshifts_UserId_Users_Id")
                 .FromTable("Workshifts").ForeignColumn("UserId")
@@ -106,6 +107,16 @@ namespace PoS.Data.Migrations
 
             #region Users
             Insert.IntoTable("Users").Row(new { Username = "Admin", Password = "admin", UserType = 1 });
+            #endregion
+
+            #region Categories
+            Insert.IntoTable("Categories").Row(new { Name = "Candies" });
+            #endregion
+
+            #region Products
+            Insert.IntoTable("Products").Row(new { Barcode = "074323077629", Name = "Kranky 15g", Description = "Hojuelas de maiz con cubierta sabor chocolate", Price = 10.00, VAT = 0.15, CategoryId = 1 });
+            Insert.IntoTable("Products").Row(new { Barcode = "724869001748", Name = "Paleta MALVA BONY 12g", Description = "Malvavisco con covertura sabor chocolate", Price = 5.00, VAT = 0.15, CategoryId = 1 });
+            Insert.IntoTable("Products").Row(new { Barcode = "02526719", Name = "Duvalin Tri-sabor 15g", Description = "Dulce cremoso sabor avellana, fresa y vainilla", Price = 7.00, VAT = 0.15, CategoryId = 1 });
             #endregion
         }
 
