@@ -20,6 +20,7 @@ namespace PoS.Forms.Sales
         UsersService usersService;
         CustomersService customersService;
         ProductsService productsService;
+        SalesService salesService;
 
         public frmSales()
         {
@@ -35,6 +36,7 @@ namespace PoS.Forms.Sales
             usersService = new UsersService();
             customersService = new CustomersService();
             productsService = new ProductsService();
+            salesService = new SalesService();
 
             this.Load += (s, e) =>
             {
@@ -173,8 +175,33 @@ namespace PoS.Forms.Sales
 
         private void Charge()
         {
-            //New charged sale
+            if (listView1.Items.Count == 0)
+                return;
+
+            var sale = new Sale();
+            
+            sale.SaleDetails = SaleDetails(listView1.Items);
+
+            var customer = customersService.Find(txtTaxId.Text);
+
+            salesService.Create(sale, Convert.ToDecimal(txtSubtotal.Text), Convert.ToDecimal(txtDiscount.Text), Convert.ToDecimal(txtTotal.Text), this.User, customer);
+
             StartNewSale();
+        }
+
+        private List<SaleDetail> SaleDetails(ListView.ListViewItemCollection items)
+        {
+            var products = new List<SaleDetail>();
+
+            foreach (ListViewItem item in items)
+            {
+                var product = productsService.Find(item.SubItems[0].Text);
+                int qty = Convert.ToInt32(item.SubItems[1].Text);
+
+                products.Add(new SaleDetail { ProductId = product.Id, Qty = qty });
+            }
+
+            return products;
         }
 
         private void CalculateSubtotal()
