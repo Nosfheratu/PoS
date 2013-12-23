@@ -22,5 +22,10 @@ namespace PoS.Services
         {
             return cursomersRepository.GetAll().FirstOrDefault();
         }
+
+        public Customer Find(string taxId)
+        {
+            return cursomersRepository.Find(taxId);
+        }
     }
 }
