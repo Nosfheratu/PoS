@@ -75,25 +75,40 @@ namespace PoS.Data.Migrations
                 .ToTable("Users").PrimaryColumn("Id");
             #endregion
 
-            #region Purchases
-            Create.Table("Purchases")
+            #region Sales
+            Create.Table("Sales")
                 .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
                 .WithColumn("Date").AsDateTime().NotNullable()
                 .WithColumn("TransactionNumber").AsString().NotNullable()
-                .WithColumn("Total").AsDecimal().NotNullable()
-                .WithColumn("Discount").AsDecimal().NotNullable();
+                .WithColumn("Total").AsDecimal(10, 2).NotNullable()
+                .WithColumn("Amount").AsDecimal(10, 2).NotNullable()
+                .WithColumn("Discount").AsDecimal(10, 2).NotNullable()
+                .WithColumn("UserId").AsInt32().NotNullable() //If provider is SQLite
+                .WithColumn("CustomerId").AsInt32().NotNullable(); //If provider is SQLite
 
-            Create.ForeignKey("fk_Purchases_ProductId_Products_Id")
-                .FromTable("Purchases").ForeignColumn("ProductId")
-                .ToTable("Products").PrimaryColumn("Id");
-
-            Create.ForeignKey("fk_Purchases_UserId_Users_Id")
-                .FromTable("Purchases").ForeignColumn("UserId")
+            Create.ForeignKey("fk_Sales_UserId_Users_Id")
+                .FromTable("Sales").ForeignColumn("UserId")
                 .ToTable("Users").PrimaryColumn("Id");
 
-            Create.ForeignKey("fk_Purchases_CustomerId_Customers_Id")
-                .FromTable("Purchases").ForeignColumn("CustomerId")
+            Create.ForeignKey("fk_Sales_CustomerId_Customers_Id")
+                .FromTable("Sales").ForeignColumn("CustomerId")
                 .ToTable("Customers").PrimaryColumn("Id");
+
+            #region Details
+            Create.Table("SalesDetails")
+                .WithColumn("Id").AsInt32().NotNullable()
+                .WithColumn("ProductId").AsInt32().NotNullable() //If provider is SQLite
+                .WithColumn("SaleId").AsInt32().NotNullable() //If provider is SQLite
+                .WithColumn("Qty").AsInt32().NotNullable();
+
+            Create.ForeignKey("fk_SalesDetails_ProductId_Products_Id")
+                .FromTable("SalesDetails").ForeignColumn("ProductId")
+                .ToTable("Products").PrimaryColumn("Id");
+
+            Create.ForeignKey("fk_SalesDetails_SaleId_Sales_Id")
+                .FromTable("SalesDetails").ForeignColumn("SaleId")
+                .ToTable("Sales").PrimaryColumn("Id");
+            #endregion
             #endregion
 
             SeedData();
@@ -122,7 +137,9 @@ namespace PoS.Data.Migrations
 
         public override void Down()
         {
-            Delete.Table("Purchases");
+            Delete.Table("Sales");
+
+            Delete.Table("SalesDetails");
 
             Delete.Table("Workshifts");
             

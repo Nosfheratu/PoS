@@ -26,6 +26,11 @@ namespace PoS.Entities
         
         public Category Category { get; set; }
 
-        public IList<Purchase> Purchases { get; set; }
+        public IList<SaleDetail> SaleDetails { get; set; }
+
+        public Product()
+        {
+            this.SaleDetails = new List<SaleDetail>();
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace PoS.Entities
 
         public IList<Workshift> Workshifts { get; set; }
         
-        public IList<Purchase> Purchases { get; set; }
+        public IList<Sale> Sales { get; set; }
 
         public bool ValidatePassword(string password)
         {
@@ -28,6 +28,7 @@ namespace PoS.Entities
         public User()
         {
             this.Workshifts = new List<Workshift>();
+            this.Sales = new List<Sale>();
         }
     }
 

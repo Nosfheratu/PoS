@@ -13,5 +13,10 @@ namespace PoS.Entities
         public string Name { get; set; }
 
         public IList<Product> Products { get; set; }
+
+        public Category()
+        {
+            this.Products = new List<Product>();
+        }
     }
 }

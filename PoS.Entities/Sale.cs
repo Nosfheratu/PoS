@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace PoS.Entities
 {
-    public class Purchase
+    public class Sale
     {
         public int Id { get; set; }
-        
-        public DateTime Date { get; set; }
+
+        public DateTime Date { get { return DateTime.Now; } }
         
         public string TransactionNumber { get; set; }
         
         public decimal Total { get; set; }
+
+        public decimal Amount { get; set; }
         
         public decimal Discount { get; set; }
 
-        public int ProductId { get; set; }
-        
-        public Product Product { get; set; }
+        public IList<SaleDetail> SaleDetails { get; set; }
 
         public int UserId { get; set; }
         
@@ -29,5 +29,10 @@ namespace PoS.Entities
         public int CustomerId { get; set; }
         
         public Customer Customer { get; set; }
+
+        public Sale()
+        {
+            this.SaleDetails = new List<SaleDetail>();
+        }
     }
 }

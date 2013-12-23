@@ -22,11 +22,11 @@ namespace PoS.Entities
         
         public string ZipCode { get; set; }
 
-        public IList<Purchase> Purchases { get; set; }
+        public IList<Sale> Sales { get; set; }
 
         public Customer()
         {
-            this.Purchases = new List<Purchase>();
+            this.Sales = new List<Sale>();
         }
     }
 }
