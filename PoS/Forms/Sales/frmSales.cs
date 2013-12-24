@@ -17,7 +17,6 @@ namespace PoS.Forms.Sales
     {
         User User;
 
-        UsersService usersService;
         CustomersService customersService;
         ProductsService productsService;
         SalesService salesService;
@@ -33,7 +32,6 @@ namespace PoS.Forms.Sales
             
             this.User = user;
 
-            usersService = new UsersService();
             customersService = new CustomersService();
             productsService = new ProductsService();
             salesService = new SalesService();
@@ -46,10 +44,7 @@ namespace PoS.Forms.Sales
 
             this.KeyDown += (s, e) =>
             {
-                switch (e.KeyCode)
-                {
-                    
-                }
+
             };
             
             txtBarcode.KeyDown += (s, e) =>
@@ -184,9 +179,13 @@ namespace PoS.Forms.Sales
 
             var customer = customersService.Find(txtTaxId.Text);
 
-            salesService.Create(sale, Convert.ToDecimal(txtSubtotal.Text), Convert.ToDecimal(txtDiscount.Text), Convert.ToDecimal(txtTotal.Text), this.User, customer);
+            var frmCharge = new frmCharge(this.User, customer, sale, Convert.ToDecimal(txtSubtotal.Text), Convert.ToDecimal(txtDiscount.Text), Convert.ToDecimal(txtTotal.Text));
+            frmCharge.ShowDialog();
 
-            StartNewSale();
+            if (frmCharge.DialogResult == System.Windows.Forms.DialogResult.OK)
+                StartNewSale();
+            else if (frmCharge.DialogResult == System.Windows.Forms.DialogResult.No)
+                frmCharge.Dispose();
         }
 
         private List<SaleDetail> SaleDetails(ListView.ListViewItemCollection items)
