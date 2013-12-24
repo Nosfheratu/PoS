@@ -18,11 +18,8 @@ namespace PoS.Services
             salesRepository = new SalesRepository();
         }
 
-        public Sale Create(Sale sale, decimal amount, decimal discount, decimal total, User user, Customer customer)
+        public Sale Create(Sale sale, User user, Customer customer)
         {
-            sale.Amount = amount;
-            sale.Discount = discount;
-            sale.Total = total;
             sale.TransactionNumber = Guid.NewGuid().ToString();
             sale.UserId = user.Id;
             sale.CustomerId = customer.Id;
@@ -36,6 +33,13 @@ namespace PoS.Services
             });
 
             return newSale;
+        }
+
+        public int GetTicketNumber()
+        {
+            var lastSale = salesRepository.GetAll().LastOrDefault();
+
+            return lastSale != null ? lastSale.Id + 1 : 1;
         }
     }
 }

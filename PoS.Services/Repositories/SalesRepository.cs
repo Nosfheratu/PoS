@@ -23,15 +23,16 @@ namespace PoS.Data.Repositories
             return @"C:\Users\Fernando Serapio\Documents\visual studio 2012\Projects\PoS\DB\PoSDB.sqlite";
         }
 
+        public List<Sale> GetAll()
+        {
+            return this.db.Sales.All();
+        }
+
         public Sale Add(Sale sale)
         {
             var newSale = this.db.Sales.Upsert(sale);
 
             return newSale;
-
-            //System.Diagnostics.Debug.Print(sale.Id.ToString());
-
-            //return sale;
         }
 
         public SaleDetail Add(SaleDetail saleItem)

@@ -17,8 +17,6 @@ namespace PoS
     {
         public frmMain frmMain;
 
-        //public int UserId { get { return Convert.ToInt32(cmbUsers.SelectedValue); } }
-
         public User User { get; set; }
 
         bool Logged { get; set; }
