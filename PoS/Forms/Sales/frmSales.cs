@@ -108,7 +108,7 @@ namespace PoS.Forms.Sales
         {
             var customer = customersService.GetDefaultCustomer();
 
-            txtTaxId.Text = customer.TaxId;
+            txtTaxID.Text = customer.TaxpayerID;
             txtName.Text = customer.FullName;
             txtAddress.Text = customer.Address;
 
@@ -177,7 +177,7 @@ namespace PoS.Forms.Sales
             
             sale.SaleDetails = SaleDetails(listView1.Items);
 
-            var customer = customersService.Find(txtTaxId.Text);
+            var customer = customersService.Find(txtTaxID.Text);
 
             var frmCharge = new frmCharge(this.User, customer, sale, Convert.ToDecimal(txtSubtotal.Text), Convert.ToDecimal(txtDiscount.Text), Convert.ToDecimal(txtTotal.Text));
             frmCharge.ShowDialog();

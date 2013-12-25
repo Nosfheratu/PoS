@@ -12,7 +12,7 @@ namespace PoS.Entities
         
         public string FullName { get; set; }
 
-        public string TaxId { get; set; }
+        public string TaxpayerID { get; set; }
         
         public string Address { get; set; }
         

@@ -26,7 +26,7 @@ namespace PoS.Data.Migrations
             Create.Table("Customers")
                 .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
                 .WithColumn("FullName").AsString().NotNullable()
-                .WithColumn("TaxId").AsString().NotNullable()
+                .WithColumn("TaxpayerID").AsString().NotNullable()
                 .WithColumn("Address").AsString().NotNullable()
                 .WithColumn("State").AsString().NotNullable()
                 .WithColumn("City").AsString().NotNullable()
@@ -117,7 +117,7 @@ namespace PoS.Data.Migrations
         private void SeedData()
         {
             #region Customers
-            Insert.IntoTable("Customers").Row(new { FullName = "General Public Sale", TaxId = " ", Address = " ", State = " ", City = " ", ZipCode = " " });
+            Insert.IntoTable("Customers").Row(new { FullName = "General Public Sale", TaxpayerID = " ", Address = " ", State = " ", City = " ", ZipCode = " " });
             #endregion
 
             #region Users

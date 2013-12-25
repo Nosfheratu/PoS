@@ -59,7 +59,7 @@
             this.CheaderIva = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.txtTaxId = new System.Windows.Forms.TextBox();
+            this.txtTaxID = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -367,13 +367,13 @@
             this.cHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.cHeader5.Width = 113;
             // 
-            // txtTaxId
+            // txtTaxID
             // 
-            this.txtTaxId.Location = new System.Drawing.Point(64, 24);
-            this.txtTaxId.Name = "txtTaxId";
-            this.txtTaxId.ReadOnly = true;
-            this.txtTaxId.Size = new System.Drawing.Size(106, 20);
-            this.txtTaxId.TabIndex = 11;
+            this.txtTaxID.Location = new System.Drawing.Point(64, 24);
+            this.txtTaxID.Name = "txtTaxID";
+            this.txtTaxID.ReadOnly = true;
+            this.txtTaxID.Size = new System.Drawing.Size(106, 20);
+            this.txtTaxID.TabIndex = 11;
             // 
             // label14
             // 
@@ -394,7 +394,7 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.txtAddress);
             this.groupBox1.Controls.Add(this.txtName);
-            this.groupBox1.Controls.Add(this.txtTaxId);
+            this.groupBox1.Controls.Add(this.txtTaxID);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Location = new System.Drawing.Point(22, 45);
             this.groupBox1.Name = "groupBox1";
@@ -426,7 +426,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(688, 587);
+            this.ClientSize = new System.Drawing.Size(684, 583);
             this.ControlBox = false;
             this.Controls.Add(this.txtDiscount);
             this.Controls.Add(this.txtTotal);
@@ -490,7 +490,7 @@
         private System.Windows.Forms.ColumnHeader CheaderIva;
         private System.Windows.Forms.ColumnHeader cHeader4;
         private System.Windows.Forms.ColumnHeader cHeader5;
-        private System.Windows.Forms.TextBox txtTaxId;
+        private System.Windows.Forms.TextBox txtTaxID;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label5;

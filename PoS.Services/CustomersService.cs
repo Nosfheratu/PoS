@@ -20,12 +20,12 @@ namespace PoS.Services
 
         public Customer GetDefaultCustomer()
         {
-            return cursomersRepository.GetAll().FirstOrDefault();
+            return cursomersRepository.GetFirst();
         }
 
-        public Customer Find(string taxId)
+        public Customer Find(string taxpayerID)
         {
-            return cursomersRepository.Find(taxId);
+            return cursomersRepository.Find(taxpayerID);
         }
     }
 }

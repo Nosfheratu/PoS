@@ -28,9 +28,14 @@ namespace PoS.Data.Repositories
             return db.Customers.All();
         }
 
-        public Customer Find(string taxId)
+        public Customer GetFirst()
         {
-            return db.Customers.Find(db.Customers.TaxId == taxId);
+            return db.Customers.All().FirstOrDefault();
+        }
+
+        public Customer Find(string taxpayerID)
+        {
+            return db.Customers.Find(db.Customers.TaxpayerID == taxpayerID);
         }
     }
 }
