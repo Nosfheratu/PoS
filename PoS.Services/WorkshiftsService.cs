@@ -32,9 +32,11 @@ namespace PoS.Services
 
         public bool OpenedTill()
         {
-            var workshift = workshiftRepository.GetAll().LastOrDefault();
+            var workshift = GetLastWorkshift();
             
-            return workshift.Closing == workshift.Opening ? true : false;
+            if (workshift == null) return false;
+
+            return workshift.Opened;
         }
 
         public Workshift GetLastWorkshift()

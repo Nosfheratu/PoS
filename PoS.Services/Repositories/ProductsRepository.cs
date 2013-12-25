@@ -27,5 +27,15 @@ namespace PoS.Data.Repositories
         {
             return db.Products.All();
         }
+
+        public Product Get(string barcode)
+        {
+            return db.Products.Find(db.Products.Barcode == barcode);
+        }
+
+        public Product Get(int id)
+        {
+            return db.Products.Get(id);
+        }
     }
 }

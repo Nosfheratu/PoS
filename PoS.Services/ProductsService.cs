@@ -20,7 +20,12 @@ namespace PoS.Services
         
         public Product Find(string barcode)
         {
-            return productsRepository.GetAll().SingleOrDefault(p => p.Barcode == barcode);
+            return productsRepository.Get(barcode);
+        }
+
+        public Product Find(int id)
+        {
+            return productsRepository.Get(id);
         }
     }
 }
