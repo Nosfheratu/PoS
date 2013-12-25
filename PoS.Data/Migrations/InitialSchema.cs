@@ -59,6 +59,7 @@ namespace PoS.Data.Migrations
                 .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
                 .WithColumn("Username").AsString().NotNullable()
                 .WithColumn("Password").AsString().NotNullable()
+                .WithColumn("FullName").AsString().NotNullable()
                 .WithColumn("UserType").AsInt32().NotNullable();
             #endregion
 
@@ -121,7 +122,8 @@ namespace PoS.Data.Migrations
             #endregion
 
             #region Users
-            Insert.IntoTable("Users").Row(new { Username = "Admin", Password = "admin", UserType = 1 });
+            Insert.IntoTable("Users").Row(new { Username = "Admin", Password = "admin", FullName = "Ash Ketchum", UserType = 1 });
+            Insert.IntoTable("Users").Row(new { Username = "Sale1", Password = "sale1", FullName = "Gary Oak", UserType = 2 });
             #endregion
 
             #region Categories

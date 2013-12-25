@@ -87,7 +87,7 @@ namespace PoS
                 btnCloseTill.Enabled = true;
                 btnOpenTill.Enabled = false;
 
-                lblNombreUsuario.Text = this.CurrentUser.Username;
+                lblNombreUsuario.Text = this.CurrentUser.FullName;
                 lblUserId.Text = this.CurrentUser.Id.ToString();
             }
             else
@@ -114,7 +114,7 @@ namespace PoS
                 btnOpenTill.Enabled = false;
                 
                 lblUserId.Text = this.CurrentUser.Id.ToString();
-                lblNombreUsuario.Text = this.CurrentUser.Username;
+                lblNombreUsuario.Text = this.CurrentUser.FullName;
                 
                 OpenTillForUser(this.CurrentUser);
                 
