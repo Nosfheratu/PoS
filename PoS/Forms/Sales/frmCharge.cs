@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using PoS.Entities;
 using PoS.Services;
+using PoS.Tickets;
 
 namespace PoS.Forms.Sales
 {
@@ -21,6 +22,7 @@ namespace PoS.Forms.Sales
         Sale Sale;
 
         SalesService salesService;
+        ProductsService productsService;
 
         public frmCharge()
         {
@@ -39,6 +41,7 @@ namespace PoS.Forms.Sales
             this.Sale = sale;
 
             this.salesService = new SalesService();
+            this.productsService = new ProductsService();
 
             this.Load += (s, e) =>
             {
@@ -66,6 +69,8 @@ namespace PoS.Forms.Sales
                 //
                 //PrintTicket
                 //
+                PrintTicket(this.Sale);
+
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
                 this.Close();
             };
@@ -81,6 +86,8 @@ namespace PoS.Forms.Sales
                     //
                     //PrintTicket
                     //
+                    PrintTicket(this.Sale);
+
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
                     this.Close();
                 }
@@ -90,6 +97,51 @@ namespace PoS.Forms.Sales
             {
                 this.DialogResult = System.Windows.Forms.DialogResult.No;
             };
+        }
+
+        private void PrintTicket(Sale sale)
+        {
+            var ticket = new Ticket();
+            ticket.MaxChar = 30;
+            ticket.MaxCharDescription = 15;
+
+            ticket.AddHeaderLine("[Shop Name Here]");
+            ticket.AddHeaderLine("[Taxpayer ID Here]");
+            ticket.AddHeaderLine("[Shop Address Here]");
+            ticket.AddHeaderLine("[Shop Phone Here]");
+            ticket.AddHeaderLine("");
+            ticket.AddHeaderLine("[Customer Name Here]");
+
+            ticket.AddSubHeaderLine("[Ticket Number Here*");
+            ticket.AddSubHeaderLine("[Sales User Name Here]");
+            ticket.AddSubHeaderLine("[Current Date and Time Here]");
+
+            decimal subtotal = sale.Amount;
+            int productNumer = 0;
+
+            sale.SaleDetails.ToList().ForEach(sd =>
+            {
+                productNumer += sd.Qty;
+                var product = productsService.Find(sd.ProductId);
+
+                ticket.AddItem(sd.Qty.ToString(), product.Name, product.Price.ToString("C"));
+            });
+
+            ticket.AddTotal("Amount : ", sale.Amount.ToString("C"));
+            ticket.AddTotal("", "");
+            ticket.AddTotal("Tax : ", "[Taxs Here]");
+            ticket.AddTotal("", "");
+            ticket.AddTotal("Dicount : ", sale.Discount.ToString("C"));
+            ticket.AddTotal("", "----------");
+            ticket.AddTotal("TOTAL : ", sale.Total.ToString("C"));
+            ticket.AddTotal("Cash : ", string.Format(txtCash.Text, "C"));
+            ticket.AddTotal("Change : ", string.Format(txtChange.Text, "C"));
+
+            ticket.AddFooterLine("");
+            ticket.AddFooterLine(string.Format("Products number: {0}", productNumer.ToString()));
+
+            if (ticket.PrinterExists("doPDF v7"))
+                ticket.PrintTicket("doPDF v7");
         }
     }
 }
